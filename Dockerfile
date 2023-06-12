@@ -1,4 +1,9 @@
 FROM node:alpine
-COPY . /app
+FROM python:3.8.5-buster
 WORKDIR /app
-CMD   node /app/app.js
+RUN mkdir -p /app/data
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+COPY data .
+#CMD echo `pip list | egrep -i "shap|panda|numpy"`
+
